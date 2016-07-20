@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Five</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<script type="text/javascript" src="new.js"></script>
+<script type="text/javascript" src="paint.js"></script>
+<script type="text/javascript" src="button.js"></script>
+<script type="text/javascript" language="JavaScript">
+window.onload = function(){
+	paint_chess();		//画棋盘
+	
+}
+var temp2= 0 ;
+function mouse(){
+	if(started == 1){
+		var ad = getMousePos();
+		step++;
+		var stepp = document.getElementById("step");
+		stepp.innerHTML = "当前步数："+step;
+		var score = document.getElementById("score");
+		if(chessboard[ad.x][ad.y] == 0){
+			add_chessman(ad,turn)
+			if(1 == xianshou)
+				circle(ad.x*weight+8,ad.y*weight+8,14,"#fff");
+			else
+				circle(ad.x*weight+8,ad.y*weight+8,14,"#000");
+			turn = 1;
+			var nn = check();
+			if(nn == 1){
+				alert("电脑胜利！");
+				step=0;
+				win_times[0]++;
+				score.innerHTML="电脑胜利："+win_times[0]+"<br/>人胜利：<br/>"+win_times[1];
+				started = 0;
+				return;
+			}else if(nn == 2){
+				alert("恭喜你，你赢了！");
+				step=0;
+				win_times[1]++;
+				score.innerHTML="电脑胜利："+win_times[0]+"<br/>人胜利：<br/>"+win_times[1];
+				started = 0;
+				return ;
+			}
+			initialize();
+			pingfe();
+			var temp = sosuo(turn);
+			if(chessboard[temp.x][temp.y] == 0){
+				add_chessman(temp,turn)
+				if(1 == xianshou){
+					circle(temp.x*weight+8,temp.y*weight+8,14,"#000");
+					circle(temp.x*weight+8,temp.y*weight+8,4,"#f00");
+					circle(temp2.x*weight+8,temp2.y*weight+8,5,"#000");
+				}
+				else{
+					circle(temp.x*weight+8,temp.y*weight+8,14,"#fff");
+					circle(temp.x*weight+8,temp.y*weight+8,4,"#f00");
+					circle(temp2.x*weight+8,temp2.y*weight+8,5,"#fff");
+				}
+				
+				temp2 = temp;
+				turn = 2;
+			}
+			var nn = check();
+			if(nn == 1){
+				alert("电脑胜利！");
+				win_times[0]++;
+				step=0;
+				score.innerHTML="电脑胜利："+win_times[0]+"<br/>人胜利：<br/>"+win_times[1];
+				started = 0;
+			}else if(nn == 2){
+				alert("恭喜你，你赢了！");
+				step=0;
+				win_times[1]++;
+				score.innerHTML="电脑胜利："+win_times[0]+"<br/>人胜利：<br/>"+win_times[1];
+				started = 0;
+			}
+		}
+	}
+}
+</script>
+<body bgcolor="#39f">
+	<canvas id="myCanvas" width="450px" height="450px" onclick="mouse()"></canvas>
+	<input type="button" value="电脑先手" onclick="first()" id="first">
+	<input type="button" value="开  始" onclick="start()" id="start">
+	<div id = "step" style="text-align:center;">当前步数：0</div>
+	<div id="score">五子棋</div>
+		<select id="sele" onchange="geta()">
+		  <option value="0">初级</option>
+		  <option value="1">高级</option>
+		</select>
+</body>
+</html>

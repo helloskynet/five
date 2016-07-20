@@ -1,0 +1,40 @@
+#myCanvas{
+	width:450px;
+	height:450px;
+	margin: 40px auto;
+	display:block;
+}
+input{
+	width:100px;
+	height:30px;
+	font-size:20px;
+}
+#score{
+	width:100px;
+	height:100px;
+	color:red;
+	background:white;
+	top:20%;
+	right:20%;
+	position:absolute;
+	text-align:center;
+	font-size:20px;
+}
+#first{
+	top:42%;
+	right:20%;
+	position:absolute;
+}
+#start{
+	top:50%;
+	right:20%;
+	position:absolute;
+}
+#sele{
+	top:60%;
+	right:20%;
+	width:100px;
+	height:30px;
+	font-size:10px;
+	position:absolute;
+}
